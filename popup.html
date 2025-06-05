@@ -140,6 +140,46 @@
             font-weight: 500;
         }
 
+        .reset-section {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .reset-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .reset-btn:active {
+            transform: translateY(0);
+        }
+
+        .reset-icon {
+            width: 14px;
+            height: 14px;
+        }
+
         .footer {
             margin-top: 16px;
             padding-top: 12px;
@@ -213,6 +253,15 @@
                 </div>
                 <input id="trebleSlider" type="range" min="-15" max="15" step="1" value="0" />
             </div>
+        </div>
+
+        <div class="reset-section">
+            <button id="resetBtn" class="reset-btn">
+                <svg class="reset-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+                </svg>
+                Reset
+            </button>
         </div>
 
         <div class="footer">
