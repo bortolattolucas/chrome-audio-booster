@@ -58,6 +58,18 @@ function updateUI(values) {
   trebleValue.textContent = `${values.treble}dB`;
 }
 
+// Função para resetar todos os valores
+function resetAllValues() {
+  updateUI(defaultValues);
+  adjustAudio({
+    gain: defaultValues.volume,
+    bass: defaultValues.bass,
+    mid: defaultValues.mid,
+    treble: defaultValues.treble
+  });
+  saveValues(defaultValues);
+}
+
 // Eventos dos sliders
 volSlider.oninput = e => {
   const v = parseFloat(e.target.value);
@@ -99,4 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     mid: savedValues.mid,
     treble: savedValues.treble
   });
+
+  // Event listener para o botão reset
+  document.getElementById('resetBtn').addEventListener('click', resetAllValues);
 });
