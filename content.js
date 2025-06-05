@@ -45,6 +45,11 @@
 })();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "ping") {
+    sendResponse({ status: "injected" });
+    return true;
+  }
+  
   if (message.action === "adjust" && window.__audioBooster__) {
     document.querySelectorAll("audio, video").forEach(el => {
       const nodes = el.__audioNodes__;
@@ -57,5 +62,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (message.mid != null) nodes.midEQ.gain.value = message.mid;
       if (message.treble != null) nodes.trebleEQ.gain.value = message.treble;
     });
+    sendResponse({ status: "adjusted" });
+    return true;
   }
 });
