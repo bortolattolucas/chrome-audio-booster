@@ -1,6 +1,6 @@
 # Privacy Policy – Chrome Audio Booster
 
-**Effective date: [Atualize com a data de hoje]**
+**Effective date: 2025-06-05**
 
 Chrome Audio Booster is a Chrome extension that provides local audio enhancements such as volume boosting and equalizer adjustments for media elements in the browser.
 
