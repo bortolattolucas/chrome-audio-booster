@@ -16,11 +16,34 @@ const defaultValues = {
   treble: 0
 };
 
+// Função para injetar o content script na aba ativa
+async function injectContentScript() {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    // Verifica se já foi injetado
+    const results = await chrome.tabs.sendMessage(tab.id, { action: "ping" }).catch(() => null);
+    if (results) return; // Já foi injetado
+    
+    // Injeta o script
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ['content.js']
+    });
+  } catch (error) {
+    console.warn("Erro ao injetar content script:", error);
+  }
+}
+
 // Função para enviar mensagem pro content script
-function adjustAudio(params) {
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "adjust", ...params });
-  });
+async function adjustAudio(params) {
+  try {
+    await injectContentScript(); // Garante que o script está injetado
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.tabs.sendMessage(tab.id, { action: "adjust", ...params });
+  } catch (error) {
+    console.warn("Erro ao ajustar áudio:", error);
+  }
 }
 
 // Função para salvar valores no storage
@@ -104,7 +127,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const savedValues = await loadSavedValues();
   updateUI(savedValues);
   
-  // Aplica os valores salvos no áudio da página
+  // Injeta o content script e aplica os valores salvos
+  await injectContentScript();
   adjustAudio({
     gain: savedValues.volume,
     bass: savedValues.bass,
