@@ -3,7 +3,7 @@
   "name": "Chrome Audio Booster",
   "version": "1.0",
   "description": "Amplifies and equalizes any media played in the browser.",
-  "permissions": ["scripting", "activeTab"],
+  "permissions": ["scripting", "activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
